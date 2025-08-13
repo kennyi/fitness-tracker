@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>FitTracker Pro</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="header">
+            <h1>🏠 FitTracker Pro</h1>
+            <p>Home Gym • Fat Loss • Strength</p>
+        </div>
+        
+        <div class="current-day-card">
+            <h2 id="current-date">Loading...</h2>
+            <p id="current-day-message">Getting your workout ready...</p>
+        </div>
+        
+        <div class="day-nav">
+            <button class="nav-btn" id="prev-day-btn" onclick="goToPreviousDay()">← Prev</button>
+            <div class="week-dots">
+                <div class="day-dot" data-day="0"></div>
+                <div class="day-dot" data-day="1"></div>
+                <div class="day-dot" data-day="2"></div>
+                <div class="day-dot" data-day="3"></div>
+                <div class="day-dot" data-day="4"></div>
+                <div class="day-dot" data-day="5"></div>
+                <div class="day-dot" data-day="6"></div>
+            </div>
+            <button class="nav-btn" id="next-day-btn" onclick="goToNextDay()">Next →</button>
+        </div>
+        
+        <div class="floating-progress" id="daily-progress">0%</div>
+        
+        <div class="content">
+            <!-- WORKOUT TAB -->
+            <div id="workout" class="tab-content active">
+                <div class="week-selector">
+                    <button class="week-btn active" onclick="switchWeek(1, this)">Week 1<br>Foundation</button>
+                    <button class="week-btn" onclick="switchWeek(2, this)">Week 2<br>Intensity</button>
+                    <button class="week-btn" onclick="switchWeek(3, this)">Week 3<br>Power</button>
+                    <button class="week-btn" onclick="switchWeek(4, this)">Week 4<br>Advanced</button>
+                </div>
+                
+                <!-- Monday Workout -->
+                <div class="workout-card" id="monday-workout">
+                    <div class="workout-title">💪 Upper Body Power</div>
+                    <div class="equipment-badges">
+                        <span class="equipment-badge">Dumbbells</span>
+                        <span class="equipment-badge">Pull-up Bar</span>
+                        <span class="equipment-badge">Dip Bar</span>
+                    </div>
+                    <div class="exercise-group">
+                        <h4>🎯 Compound Movements</h4>
+                        <div class="exercise">
+                            <div class="exercise-checkbox" onclick="toggleExercise(this)"></div>
+                            <div class="exercise-info">
+                                <div class="exercise-name">Pull-ups</div>
+                                <div class="exercise-details">4 sets × 6-10 reps</div>
+                            </div>
+                        </div>
+                        <div class="exercise">
+                            <div class="exercise-checkbox" onclick="toggleExercise(this)"></div>
+                            <div class="exercise-info">
+                                <div class="exercise-name">Dumbbell Bench Press</div>
+                                <div class="exercise-details">4 sets × 8-12 reps</div>
+                            </div>
+                        </div>
+                        <div class="exercise">
+                            <div class="exercise-checkbox" onclick="toggleExercise(this)"></div>
+                            <div class="exercise-info">
+                                <div class="exercise-name">Single-arm DB Rows</div>
+                                <div class="exercise-details">3 sets × 10-12 each arm</div>
+                            </div>
+                        </div>
+                        <div class="exercise">
+                            <div class="exercise-checkbox" onclick="toggleExercise(this)"></div>
+                            <div class="exercise-info">
+                                <div class="exercise-name">Dips</div>
+                                <div class="exercise-details">3 sets × 8-15 reps</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="exercise-group">
+                        <h4>💪 Arms Superset</h4>
+                        <div class="exercise">
+                            <div class="exercise-checkbox" onclick="toggleExercise(this)"></div>
+                            <div class="exercise-info">
+                                <div class="exercise-name">DB Bicep Curls</div>
+                                <div class="exercise-details">3 sets × 12-15 reps</div>
+                            </div>
+                        </div>
+                        <div class="exercise">
+                            <div class="exercise-checkbox" onclick="toggleExercise(this)"></div>
+                            <div class="exercise-info">
+                                <div class="exercise-name">DB Skull Crushers</div>
+                                <div class="exercise-details">3 sets × 12-15 reps</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tuesday Workout -->
+                <div class="workout-card" id="tuesday-workout">
+                    <div class="workout-title">🏔️ Hill Cardio + Bands</div>
+                    <div class="equipment-badges">
+                        <span class="equipment-badge">Countryside</span>
+                        <span class="equipment-badge">Resistance Bands</span>
+                    </div>
+                    <div class="exercise-group">
+                        <h4>🏔️ Hill Training</h4>
+                        <div class="exercise">
+                            <div class="exercise-checkbox" onclick="toggleExercise(this)"></div>
+                            <div class="exercise-info">
+                                <div class="exercise-name">Hill Repeats</div>
+                                <div class="exercise-details">6 × 2 min uphill / 2 min recovery</div>
+                            </div>
+                        </div>
+                        <div class="exercise">
+                            <div class="exercise-checkbox" onclick="toggleExercise(this)"></div>
+                            <div class="exercise-info">
+                                <div class="exercise-name">Band Pull-Aparts</div>
+                                <div class="exercise-details">3 sets × 15-20 reps</div>
+                            </div>
+                        </div>
+                        <div class="exercise">
+                            <div class="exercise-checkbox" onclick="toggleExercise(this)"></div>
+                            <div class="exercise-info">
+                                <div class="exercise-name">Band Lateral Raises</div>
+                                <div class="exercise-details">3 sets × 15-20 reps</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Wednesday Workout -->
+                <div class="workout-card" id="wednesday-workout">
+                    <div class="workout-title">🦵 Lower Body Strength</div>
+                    <div class="equipment-badges">
+                        <span class="equipment-badge">Dumbbells</span>
+                        <span class="equipment-badge">Kettlebell</span>
+                        <span class="equipment-badge">Bench</span>
+                    </div>
+                    <div class="exercise-group">
+                        <h4>🦵 Primary Movements</h4>
+                        <div class="exercise">
+                            <div class="exercise-checkbox" onclick="toggleExercise(this)"></div>
+                            <div class="exercise-info">
+                                <div class="exercise-name">Kettlebell Goblet Squats</div>
+                                <div class="exercise-details">4 sets × 12-15 reps</div>
+                            </div>
+                        </div>
+                        <div class="exercise">
+                            <div class="exercise-checkbox" onclick="toggleExercise(this)"></div>
+                            <div class="exercise-info">
+                                <div class="exercise-name">DB Bulgarian Split Squats</div>
+                                <div class="exercise-details">3 sets × 10 each leg</div>
+                            </div>
+                        </div>
+                        <div class="exercise">
+                            <div class="exercise-checkbox" onclick="toggleExercise(this)"></div>
+                            <div class="exercise-info">
+                                <div class="exercise-name">DB Romanian Deadlifts</div>
+                                <div class="exercise-details">4 sets × 10-12 reps</div>
+                            </div>
+                        </div>
+                        <div class="exercise">
+                            <div class="exercise-checkbox" onclick="toggleExercise(this)"></div>
+                            <div class="exercise-info">
+                                <div class="exercise-name">Kettlebell Swings</div>
+                                <div class="exercise-details">3 sets × 20 reps</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Thursday Workout -->
+                <div class="workout-card" id="thursday-workout">
+                    <div class="workout-title">🚶‍♂️ Active Recovery</div>
+                    <div class="exercise-group">
+                        <h4>🚶‍♂️ Recovery Day</h4>
+                        <div class="exercise">
+                            <div class="exercise-checkbox" onclick="toggleExercise(this)"></div>
+                            <div class="exercise-info">
+                                <div class="exercise-name">Gentle Walk</div>
+                                <div class="exercise-details">45-60 min countryside</div>
+                            </div>
+                        </div>
+                        <div class="exercise">
+                            <div class="exercise-checkbox" onclick="toggleExercise(this)"></div>
+                            <div class="exercise-info">
+                                <div class="exercise-name">Light Stretching</div>
+                                <div class="exercise-details">10-15 min mobility</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Friday Workout -->
+                <div class="workout-card" id="friday-workout">
+                    <div class="workout-title">🔥 Full Body HIIT</div>
+                    <div class="equipment-badges">
+                        <span class="equipment-badge">All Equipment</span>
+                    </div>
+                    <div class="exercise-group">
+                        <h4>🔥 HIIT Circuit (4 rounds, 45s work / 15s rest)</h4>
+                        <div class="exercise">
+                            <div class="exercise-checkbox" onclick="toggleExercise(this)"></div>
+                            <div class="exercise-info">
+                                <div class="exercise-name">Kettlebell Swings</div>
+                                <div class="exercise-details">45 seconds max effort</div>
+                            </div>
+                        </div>
+                        <div class="exercise">
+                            <div class="exercise-checkbox" onclick="toggleExercise(this)"></div>
+                            <div class="exercise-info">
+                                <div class="exercise-name">DB Burpees</div>
+                                <div class="exercise-details">45 seconds</div>
+                            </div>
+                        </div>
+                        <div class="exercise">
+                            <div class="exercise-checkbox" onclick="toggleExercise(this)"></div>
+                            <div class="exercise-info">
+                                <div class="exercise-name">Ab Wheel Rollouts</div>
+                                <div class="exercise-details">45 seconds</div>
+                            </div>
+                        </div>
+                        <div class="exercise">
+                            <div class="exercise-checkbox" onclick="toggleExercise(this)"></div>
+                            <div class="exercise-info">
+                                <div class="exercise-name">Band Face Pulls</div>
+                                <div class="exercise-details">45 seconds</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Saturday Workout -->
+                <div class="workout-card" id="saturday-workout">
+                    <div class="workout-title">🏃‍♂️ Long Run</div>
+                    <div class="equipment-badges">
+                        <span class="equipment-badge">Hill Roads</span>
+                    </div>
+                    <div class="exercise-group">
+                        <h4>🏃‍♂️ Weekend Long Run</h4>
+                        <div class="exercise">
+                            <div class="exercise-checkbox" onclick="toggleExercise(this)"></div>
+                            <div class="exercise-info">
+                                <div class="exercise-name">Countryside Run</div>
+                                <div class="exercise-details">45-60 min conversational pace</div>
+                            </div>
+                        </div>
+                        <div class="exercise">
+                            <div class="exercise-checkbox" onclick="toggleExercise(this)"></div>
+                            <div class="exercise-info">
+                                <div class="exercise-name">Hill Variety</div>
+                                <div class="exercise-details">Mix terrain for variety</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sunday Workout -->
+                <div class="workout-card" id="sunday-workout">
+                    <div class="workout-title">😴 Complete Rest</div>
+                    <div class="exercise-group">
+                        <h4>😴 Recovery & Prep</h4>
+                        <div class="exercise">
+                            <div class="exercise-checkbox" onclick="toggleExercise(this)"></div>
+                            <div class="exercise-info">
+                                <div class="exercise-name">Complete Rest</div>
+                                <div class="exercise-details">No formal exercise</div>
+                            </div>
+                        </div>
+                        <div class="exercise">
+                            <div class="exercise-checkbox" onclick="toggleExercise(this)"></div>
+                            <div class="exercise-info">
+                                <div class="exercise-name">Meal Prep</div>
+                                <div class="exercise-details">Prepare for the week ahead</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- NUTRITION TAB -->
+            <div id="nutrition" class="tab-content">
+                <div class="nutrition-tip">
+                    <h4>🎯 Today's Focus</h4>
+                    <p>Stay in caloric deficit with high protein for fat loss and muscle retention</p>
+                </div>
+                
+                <div class="workout-card">
+                    <div class="workout-title">🥗 Daily Targets</div>
+                    <div class="progress-item">
+                        <span class="progress-label">Calories</span>
+                        <span class="progress-value">2200-2400</span>
+                    </div>
+                    <div class="progress-item">
+                        <span class="progress-label">Protein</span>
+                        <span class="progress-value">140-170g</span>
+                    </div>
+                    <div class="progress-item">
+                        <span class="progress-label">Water</span>
+                        <span class="progress-value">3+ liters</span>
+                    </div>
+                </div>
+                
+                <div class="workout-card">
+                    <div class="workout-title">💡 Quick Tips</div>
+                    <div class="exercise">
+                        <div class="exercise-info">
+                            <div class="exercise-name">Meal Timing</div>
+                            <div class="exercise-details">Eat protein within 2 hours post-workout</div>
+                        </div>
+                    </div>
+                    <div class="exercise">
+                        <div class="exercise-info">
+                            <div class="exercise-name">Pre-Workout</div>
+                            <div class="exercise-details">Small snack 30-60 min before training</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PROGRESS TAB -->
+            <div id="progress" class="tab-content">
+                <div class="workout-card">
+                    <div class="workout-title">📊 Weekly Progress</div>
+                    <div class="progress-item">
+                        <span class="progress-label">Workouts Completed</span>
+                        <span class="progress-value" id="workouts-completed">0/5</span>
+                    </div>
+                    <div class="progress-item">
+                        <span class="progress-label">This Week</span>
+                        <span class="progress-value">Week 1</span>
+                    </div>
+                </div>
+                
+                <div class="workout-card">
+                    <div class="workout-title">📏 Measurements</div>
+                    <div class="exercise">
+                        <div class="exercise-info">
+                            <div class="exercise-name">Weight</div>
+                            <div class="exercise-details">Wednesday mornings, consistency is key</div>
+                        </div>
+                    </div>
+                    <div class="exercise">
+                        <div class="exercise-info">
+                            <div class="exercise-name">Waist (at navel)</div>
+                            <div class="exercise-details">Track belly fat reduction</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SETTINGS TAB -->
+            <div id="settings" class="tab-content">
+                <div class="workout-card">
+                    <div class="workout-title">⚙️ App Settings</div>
+                    <div class="exercise">
+                        <div class="exercise-info">
+                            <div class="exercise-name">Reset Progress</div>
+                            <div class="exercise-details">Clear all completed exercises</div>
+                        </div>
+                        <button onclick="resetAllProgress()" style="background: #ff6b6b; color: white; border: none; padding: 8px 16px; border-radius: 20px; font-size: 0.8em;">Reset</button>
+                    </div>
+                </div>
+                
+                <div class="workout-card">
+                    <div class="workout-title">📱 Installation</div>
+                    <div class="exercise">
+                        <div class="exercise-info">
+                            <div class="exercise-name">Add to Home Screen</div>
+                            <div class="exercise-details">Install as app for quick access</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bottom-nav">
+            <button class="nav-item active" onclick="switchTab('workout')">
+                <div class="nav-icon">💪</div>
+                <div class="nav-label">Workout</div>
+            </button>
+            <button class="nav-item" onclick="switchTab('nutrition')">
+                <div class="nav-icon">🥗</div>
+                <div class="nav-label">Nutrition</div>
+            </button>
+            <button class="nav-item" onclick="switchTab('progress')">
+                <div class="nav-icon">📊</div>
+                <div class="nav-label">Progress</div>
+            </button>
+            <button class="nav-item" onclick="switchTab('settings')">
+                <div class="nav-icon">⚙️</div>
+                <div class="nav-label">Settings</div>
+            </button>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
