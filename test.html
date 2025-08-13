@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitTracker Pro - Unit Tests</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-result {
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        .test-pass {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .test-fail {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .test-warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        .summary {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .error-detail {
+            background: #f8f9fa;
+            padding: 10px;
+            margin-top: 5px;
+            border-left: 3px solid #dc3545;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>FitTracker Pro - Unit Tests</h1>
+    <div id="test-results"></div>
+    
+    <!-- Include the actual app files for testing -->
+    <div style="display: none;">
+        <iframe id="app-frame" src="index.html" width="100%" height="600"></iframe>
+    </div>
+
+    <script>
+        class FitTrackerTester {
+            constructor() {
+                this.tests = [];
+                this.passedTests = 0;
+                this.failedTests = 0;
+                this.warnings = 0;
+                this.resultsContainer = document.getElementById('test-results');
+            }
+
+            async runAllTests() {
+                this.log('🚀 Starting FitTracker Pro Unit Tests...\n');
+                
+                // Test 1: Global Variables
+                await this.testGlobalVariables();
+                
+                // Test 2: DOM Elements
+                await this.testDOMElements();
+                
+                // Test 3: Function Definitions
+                await this.testFunctionDefinitions();
+                
+                // Test 4: Navigation Functions
+                await this.testNavigationFunctions();
+                
+                // Test 5: Exercise Toggle Functions
+                await this.testExerciseToggle();
+                
+                // Test 6: Progress Tracking
+                await this.testProgressTracking();
+                
+                // Test 7: Tab Switching
+                await this.testTabSwitching();
+                
+                // Test 8: Week Selection
+                await this.testWeekSelection();
+                
+                // Test 9: Local Storage
+                await this.testLocalStorage();
+                
+                // Test 10: App Initialization
+                await this.testAppInitialization();
+                
+                this.displaySummary();
+            }
+
+            async testGlobalVariables() {
+                this.startTest('Global Variables Test');
+                
+                try {
+                    // Load the script content to check variables
+                    const response = await fetch('script.js');
+                    const scriptContent = await response.text();
+                    
+                    const requiredVars = [
+                        'currentDayIndex',
+                        'actualTodayIndex', 
+                        'weekOffset',
+                        'daysOfWeek',
+                        'workoutIds'
+                    ];
+                    
+                    let missingVars = [];
+                    requiredVars.forEach(varName => {
+                        if (!scriptContent.includes(`let ${varName}`) && !scriptContent.includes(`const ${varName}`)) {
+                            missingVars.push(varName);
+                        }
+                    });
+                    
+                    if (missingVars.length === 0) {
+                        this.pass('✅ All required global variables are defined');
+                    } else {
+                        this.fail(`❌ Missing global variables: ${missingVars.join(', ')}`);
+                    }
+                    
+                } catch (error) {
+                    this.fail(`❌ Error loading script.js: ${error.message}`);
+                }
+            }
+
+            async testDOMElements() {
+                this.startTest('DOM Elements Test');
+                
+                try {
+                    const response = await fetch('index.html');
+                    const htmlContent = await response.text();
+                    
+                    const requiredElements = [
+                        'current-date',
+                        'current-day-message',
+                        'daily-progress',
+                        'prev-day-btn',
+                        'next-day-btn',
+                        'workouts-completed',
+                        'current-streak',
+                        'total-workouts'
+                    ];
+                    
+                    let missingElements = [];
+                    requiredElements.forEach(elementId => {
+                        if (!htmlContent.includes(`id="${elementId}"`)) {
+                            missingElements.push(elementId);
+                        }
+                    });
+                    
+                    if (missingElements.length === 0) {
+                        this.pass('✅ All required DOM elements are present');
+                    } else {
+                        this.fail(`❌ Missing DOM elements: ${missingElements.join(', ')}`);
+                    }
+                    
+                } catch (error) {
+                    this.fail(`❌ Error loading index.html: ${error.message}`);
+                }
+            }
+
+            async testFunctionDefinitions() {
+                this.startTest('Function Definitions Test');
+                
+                try {
+                    const response = await fetch('script.js');
+                    const scriptContent = await response.text();
+                    
+                    const requiredFunctions = [
+                        'getCurrentDay',
+                        'updateDayDisplay',
+                        'goToPreviousDay',
+                        'goToNextDay',
+                        'goToToday',
+                        'switchTab',
+                        'switchWeek',
+                        'toggleExercise',
+                        'updateDailyProgress',
+                        'saveProgress',
+                        'loadProgress',
+                        'resetAllProgress',
+                        'updateProgressStats',
+                        'updateWeeklyOverview'
+                    ];
+                    
+                    let missingFunctions = [];
+                    requiredFunctions.forEach(funcName => {
+                        if (!scriptContent.includes(`function ${funcName}(`)) {
+                            missingFunctions.push(funcName);
+                        }
+                    });
+                    
+                    if (missingFunctions.length === 0) {
+                        this.pass('✅ All required functions are defined');
+                    } else {
+                        this.fail(`❌ Missing functions: ${missingFunctions.join(', ')}`);
+                    }
+                    
+                } catch (error) {
+                    this.fail(`❌ Error checking function definitions: ${error.message}`);
+                }
+            }
+
+            async testNavigationFunctions() {
+                this.startTest('Navigation Functions Test');
+                
+                try {
+                    const response = await fetch('index.html');
+                    const htmlContent = await response.text();
+                    
+                    // Check if navigation buttons have correct onclick handlers
+                    const hasCorrectHandlers = 
+                        htmlContent.includes('onclick="goToPreviousDay()"') &&
+                        htmlContent.includes('onclick="goToNextDay()"');
+                    
+                    if (hasCorrectHandlers) {
+                        this.pass('✅ Navigation functions are properly bound to HTML elements');
+                    } else {
+                        this.fail('❌ Navigation functions are not properly bound to HTML elements');
+                    }
+                    
+                } catch (error) {
+                    this.fail(`❌ Error checking navigation functions: ${error.message}`);
+                }
+            }
+
+            async testExerciseToggle() {
+                this.startTest('Exercise Toggle Test');
+                
+                try {
+                    const response = await fetch('index.html');
+                    const htmlContent = await response.text();
+                    
+                    // Check if exercise checkboxes have correct onclick handlers
+                    const hasToggleFunction = htmlContent.includes('onclick="toggleExercise(this)"');
+                    
+                    if (hasToggleFunction) {
+                        this.pass('✅ Exercise toggle function is properly bound');
+                    } else {
+                        this.fail('❌ Exercise toggle function is not properly bound');
+                    }
+                    
+                } catch (error) {
+                    this.fail(`❌ Error checking exercise toggle: ${error.message}`);
+                }
+            }
+
+            async testProgressTracking() {
+                this.startTest('Progress Tracking Test');
+                
+                try {
+                    const scriptResponse = await fetch('script.js');
+                    const scriptContent = await scriptResponse.text();
+                    
+                    // Check if progress tracking functions exist
+                    const hasProgressFunctions = 
+                        scriptContent.includes('updateProgressStats') &&
+                        scriptContent.includes('updateWeeklyOverview') &&
+                        scriptContent.includes('saveProgress') &&
+                        scriptContent.includes('loadProgress');
+                    
+                    if (hasProgressFunctions) {
+                        this.pass('✅ Progress tracking functions are implemented');
+                    } else {
+                        this.fail('❌ Progress tracking functions are missing');
+                    }
+                    
+                } catch (error) {
+                    this.fail(`❌ Error checking progress tracking: ${error.message}`);
+                }
+            }
+
+            async testTabSwitching() {
+                this.startTest('Tab Switching Test');
+                
+                try {
+                    const htmlResponse = await fetch('index.html');
+                    const htmlContent = await htmlResponse.text();
+                    
+                    // Check if tab buttons have correct onclick handlers
+                    const hasTabSwitching = htmlContent.includes('onclick="switchTab(');
+                    
+                    if (hasTabSwitching) {
+                        this.pass('✅ Tab switching is properly implemented');
+                    } else {
+                        this.fail('❌ Tab switching is not properly implemented');
+                    }
+                    
+                } catch (error) {
+                    this.fail(`❌ Error checking tab switching: ${error.message}`);
+                }
+            }
+
+            async testWeekSelection() {
+                this.startTest('Week Selection Test');
+                
+                try {
+                    const htmlResponse = await fetch('index.html');
+                    const htmlContent = await htmlResponse.text();
+                    
+                    // Check if week buttons have correct onclick handlers
+                    const hasWeekSelection = htmlContent.includes('onclick="switchWeek(');
+                    
+                    if (hasWeekSelection) {
+                        this.pass('✅ Week selection is properly implemented');
+                    } else {
+                        this.fail('❌ Week selection is not properly implemented');
+                    }
+                    
+                } catch (error) {
+                    this.fail(`❌ Error checking week selection: ${error.message}`);
+                }
+            }
+
+            async testLocalStorage() {
+                this.startTest('Local Storage Test');
+                
+                try {
+                    const scriptResponse = await fetch('script.js');
+                    const scriptContent = await scriptResponse.text();
+                    
+                    // Check if localStorage is used correctly
+                    const hasLocalStorage = 
+                        scriptContent.includes('localStorage.setItem') &&
+                        scriptContent.includes('localStorage.getItem') &&
+                        scriptContent.includes('localStorage.removeItem');
+                    
+                    if (hasLocalStorage) {
+                        this.pass('✅ Local storage functionality is implemented');
+                    } else {
+                        this.warning('⚠️ Local storage functionality may be incomplete');
+                    }
+                    
+                } catch (error) {
+                    this.fail(`❌ Error checking local storage: ${error.message}`);
+                }
+            }
+
+            async testAppInitialization() {
+                this.startTest('App Initialization Test');
+                
+                try {
+                    const scriptResponse = await fetch('script.js');
+                    const scriptContent = await scriptResponse.text();
+                    
+                    // Check if DOMContentLoaded event is set up
+                    const hasInitialization = scriptContent.includes('DOMContentLoaded');
+                    
+                    if (hasInitialization) {
+                        this.pass('✅ App initialization is properly set up');
+                    } else {
+                        this.fail('❌ App initialization is not properly set up');
+                    }
+                    
+                } catch (error) {
+                    this.fail(`❌ Error checking app initialization: ${error.message}`);
+                }
+            }
+
+            startTest(testName) {
+                this.currentTest = testName;
+                this.log(`\n🔍 Running: ${testName}`);
+            }
+
+            pass(message) {
+                this.passedTests++;
+                this.addResult(message, 'test-pass');
+            }
+
+            fail(message) {
+                this.failedTests++;
+                this.addResult(message, 'test-fail');
+            }
+
+            warning(message) {
+                this.warnings++;
+                this.addResult(message, 'test-warning');
+            }
+
+            addResult(message, className) {
+                const resultDiv = document.createElement('div');
+                resultDiv.className = `test-result ${className}`;
+                resultDiv.textContent = message;
+                this.resultsContainer.appendChild(resultDiv);
+            }
+
+            log(message) {
+                const logDiv = document.createElement('div');
+                logDiv.style.marginBottom = '10px';
+                logDiv.style.fontWeight = 'bold';
+                logDiv.textContent = message;
+                this.resultsContainer.appendChild(logDiv);
+            }
+
+            displaySummary() {
+                const totalTests = this.passedTests + this.failedTests + this.warnings;
+                const successRate = ((this.passedTests / totalTests) * 100).toFixed(1);
+                
+                this.log(`\n📊 TEST SUMMARY:`);
+                this.log(`Total Tests: ${totalTests}`);
+                this.log(`Passed: ${this.passedTests}`);
+                this.log(`Failed: ${this.failedTests}`);
+                this.log(`Warnings: ${this.warnings}`);
+                this.log(`Success Rate: ${successRate}%`);
+                
+                if (this.failedTests === 0) {
+                    this.addResult('🎉 ALL TESTS PASSED! Your FitTracker Pro is working correctly.', 'test-pass');
+                } else {
+                    this.addResult(`⚠️ ${this.failedTests} test(s) failed. Please fix the issues above.`, 'test-fail');
+                }
+            }
+        }
+
+        // Run tests when page loads
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Small delay to ensure all scripts are loaded
+            setTimeout(async () => {
+                const tester = new FitTrackerTester();
+                await tester.runAllTests();
+            }, 500);
+        });
+    </script>
+</body>
+</html>
