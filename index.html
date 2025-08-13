@@ -63,6 +63,10 @@
                             <div class="exercise-info">
                                 <div class="exercise-name">Pull-ups</div>
                                 <div class="exercise-details">4 sets × 6-10 reps</div>
+                                <div class="exercise-timer">
+                                    <button class="timer-btn" data-exercise="pull-ups" data-type="strength" data-rest="90">Start Set</button>
+                                    <span class="timer-display">Rest: 90s</span>
+                                </div>
                             </div>
                         </div>
                         <div class="exercise">
@@ -70,6 +74,10 @@
                             <div class="exercise-info">
                                 <div class="exercise-name">Dumbbell Bench Press</div>
                                 <div class="exercise-details">4 sets × 8-12 reps</div>
+                                <div class="exercise-timer">
+                                    <button class="timer-btn" data-exercise="db-bench" data-type="strength" data-rest="120">Start Set</button>
+                                    <span class="timer-display">Rest: 2m</span>
+                                </div>
                             </div>
                         </div>
                         <div class="exercise">
@@ -127,6 +135,10 @@
                             <div class="exercise-info">
                                 <div class="exercise-name">Main Set</div>
                                 <div class="exercise-details">8 × 50m freestyle (30s rest)</div>
+                                <div class="exercise-timer">
+                                    <button class="timer-btn" data-exercise="swim-main" data-type="swimming" data-distance="50" data-rest="30" data-laps="8">Start Swimming</button>
+                                    <span class="timer-display">50m intervals</span>
+                                </div>
                             </div>
                         </div>
                         <div class="exercise">
@@ -234,6 +246,10 @@
                             <div class="exercise-info">
                                 <div class="exercise-name">Rowing Machine</div>
                                 <div class="exercise-details">45 seconds max effort</div>
+                                <div class="exercise-timer">
+                                    <button class="timer-btn" data-exercise="rowing" data-type="hiit" data-work="45" data-rest="15">Start HIIT</button>
+                                    <span class="timer-display">45s work / 15s rest</span>
+                                </div>
                             </div>
                         </div>
                         <div class="exercise">
@@ -436,6 +452,50 @@
                 <div class="nav-icon">⚙️</div>
                 <div class="nav-label">Settings</div>
             </button>
+        </div>
+    </div>
+    
+    <!-- Timer Modal -->
+    <div id="timer-modal" class="timer-modal">
+        <div class="timer-modal-content">
+            <div class="timer-header">
+                <h2 id="timer-exercise-name">Exercise Name</h2>
+                <button class="timer-close" id="close-timer">×</button>
+            </div>
+            
+            <div class="timer-main">
+                <div class="timer-circle">
+                    <svg class="timer-progress" width="200" height="200">
+                        <circle cx="100" cy="100" r="90" fill="none" stroke="#f0f0f0" stroke-width="8"/>
+                        <circle id="timer-progress-circle" cx="100" cy="100" r="90" fill="none" stroke="#667eea" stroke-width="8" stroke-linecap="round" transform="rotate(-90 100 100)"/>
+                    </svg>
+                    <div class="timer-time" id="timer-time">00:00</div>
+                    <div class="timer-phase" id="timer-phase">Ready</div>
+                </div>
+            </div>
+            
+            <div class="timer-controls">
+                <button class="timer-control-btn" id="timer-start">Start</button>
+                <button class="timer-control-btn" id="timer-pause">Pause</button>
+                <button class="timer-control-btn" id="timer-skip">Skip</button>
+            </div>
+            
+            <div class="timer-info">
+                <div class="timer-stats">
+                    <div class="timer-stat">
+                        <span class="timer-stat-label">Set</span>
+                        <span class="timer-stat-value" id="timer-current-set">1</span>
+                    </div>
+                    <div class="timer-stat">
+                        <span class="timer-stat-label">Total</span>
+                        <span class="timer-stat-value" id="timer-total-sets">4</span>
+                    </div>
+                    <div class="timer-stat">
+                        <span class="timer-stat-label">Completed</span>
+                        <span class="timer-stat-value" id="timer-completed">0</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>
