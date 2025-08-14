@@ -23,7 +23,7 @@
             <div id="workout" class="tab-content active">
                 <div class="current-day-card">
                     <h2 id="current-date">Loading...</h2>
-                    <p id="current-day-message">Getting your workout ready...</p>
+                    <p id="current-day-message">Log your workout for today</p>
                 </div>
                 
                 <div class="day-nav">
@@ -40,308 +40,134 @@
                     <button class="nav-btn" id="next-day-btn">Next →</button>
                 </div>
                 
-                <div class="week-selector">
-                    <button class="week-btn active" data-week="1">Week 1<br>Foundation</button>
-                    <button class="week-btn" data-week="2">Week 2<br>Intensity</button>
-                    <button class="week-btn" data-week="3">Week 3<br>Power</button>
-                    <button class="week-btn" data-week="4">Week 4<br>Advanced</button>
-                </div>
-                
-                <!-- Monday Workout -->
-                <div class="workout-card" id="monday-workout">
-                    <div class="workout-title">💪 Upper Body Power</div>
-                    <div class="equipment-badges">
-                        <span class="equipment-badge">Dumbbells</span>
-                        <span class="equipment-badge">Pull-up Bar</span>
-                        <span class="equipment-badge">Dip Bar</span>
-                    </div>
-                    <div class="exercise-group">
-                        <h4>🎯 Compound Movements</h4>
-                        <div class="exercise">
-                            <div class="exercise-checkbox"></div>
-                            <div class="exercise-info">
-                                <div class="exercise-name">Pull-ups</div>
-                                <div class="exercise-details">4 sets × 6-10 reps</div>
-                                <div class="exercise-tracking">
-                                    <div class="tracking-inputs">
-                                        <input type="number" class="weight-input" placeholder="Weight" data-exercise="pull-ups">
-                                        <span class="weight-unit">kg</span>
-                                        <input type="number" class="reps-input" placeholder="Reps" data-exercise="pull-ups">
-                                        <button class="log-btn" data-exercise="pull-ups">Log Set</button>
-                                    </div>
-                                    <div class="exercise-history" id="pull-ups-history">
-                                        <span class="last-performance">Last: -</span>
-                                        <span class="personal-record">PR: -</span>
-                                    </div>
-                                </div>
-                                <div class="exercise-timer">
-                                    <button class="timer-btn" data-exercise="pull-ups" data-type="strength" data-rest="90">Start Set</button>
-                                    <span class="timer-display">Rest: 90s</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="exercise">
-                            <div class="exercise-checkbox"></div>
-                            <div class="exercise-info">
-                                <div class="exercise-name">Dumbbell Bench Press</div>
-                                <div class="exercise-details">4 sets × 8-12 reps</div>
-                                <div class="exercise-tracking">
-                                    <div class="tracking-inputs">
-                                        <input type="number" class="weight-input" placeholder="Weight" data-exercise="db-bench">
-                                        <span class="weight-unit">kg</span>
-                                        <input type="number" class="reps-input" placeholder="Reps" data-exercise="db-bench">
-                                        <button class="log-btn" data-exercise="db-bench">Log Set</button>
-                                    </div>
-                                    <div class="exercise-history" id="db-bench-history">
-                                        <span class="last-performance">Last: -</span>
-                                        <span class="personal-record">PR: -</span>
-                                    </div>
-                                </div>
-                                <div class="exercise-timer">
-                                    <button class="timer-btn" data-exercise="db-bench" data-type="strength" data-rest="120">Start Set</button>
-                                    <span class="timer-display">Rest: 2m</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="exercise">
-                            <div class="exercise-checkbox"></div>
-                            <div class="exercise-info">
-                                <div class="exercise-name">Single-arm DB Rows</div>
-                                <div class="exercise-details">3 sets × 10-12 each arm</div>
-                            </div>
-                        </div>
-                        <div class="exercise">
-                            <div class="exercise-checkbox"></div>
-                            <div class="exercise-info">
-                                <div class="exercise-name">Dips</div>
-                                <div class="exercise-details">3 sets × 8-15 reps</div>
-                            </div>
+                <!-- Traditional Exercise Checkboxes (for compatibility) -->
+                <div class="workout-card" id="workout-0" style="display: none;">
+                    <div class="workout-title">💪 Monday - Upper Body Power</div>
+                    <div class="exercise">
+                        <div class="exercise-checkbox" onclick="toggleExercise(this)"></div>
+                        <div class="exercise-info">
+                            <div class="exercise-name">Bench Press</div>
+                            <div class="exercise-details">4 sets × 6-8 reps</div>
                         </div>
                     </div>
-                    <div class="exercise-group">
-                        <h4>💪 Arms Superset</h4>
-                        <div class="exercise">
-                            <div class="exercise-checkbox"></div>
-                            <div class="exercise-info">
-                                <div class="exercise-name">DB Bicep Curls</div>
-                                <div class="exercise-details">3 sets × 12-15 reps</div>
-                            </div>
-                        </div>
-                        <div class="exercise">
-                            <div class="exercise-checkbox"></div>
-                            <div class="exercise-info">
-                                <div class="exercise-name">DB Skull Crushers</div>
-                                <div class="exercise-details">3 sets × 12-15 reps</div>
-                            </div>
+                    <div class="exercise">
+                        <div class="exercise-checkbox" onclick="toggleExercise(this)"></div>
+                        <div class="exercise-info">
+                            <div class="exercise-name">Pull-ups</div>
+                            <div class="exercise-details">4 sets × 8-10 reps</div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Tuesday Workout -->
-                <div class="workout-card" id="tuesday-workout">
-                    <div class="workout-title">🏊 Pool Session</div>
-                    <div class="equipment-badges">
-                        <span class="equipment-badge">Swimming Pool</span>
-                        <span class="equipment-badge">Kickboard</span>
-                    </div>
-                    <div class="exercise-group">
-                        <h4>🏊 Swimming Program</h4>
-                        <div class="exercise">
-                            <div class="exercise-checkbox"></div>
-                            <div class="exercise-info">
-                                <div class="exercise-name">Warm-up</div>
-                                <div class="exercise-details">200m easy freestyle</div>
-                            </div>
-                        </div>
-                        <div class="exercise">
-                            <div class="exercise-checkbox"></div>
-                            <div class="exercise-info">
-                                <div class="exercise-name">Main Set</div>
-                                <div class="exercise-details">8 × 50m freestyle (30s rest)</div>
-                                <div class="exercise-timer">
-                                    <button class="timer-btn" data-exercise="swim-main" data-type="swimming" data-distance="50" data-rest="30" data-laps="8">Start Swimming</button>
-                                    <span class="timer-display">50m intervals</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="exercise">
-                            <div class="exercise-checkbox"></div>
-                            <div class="exercise-info">
-                                <div class="exercise-name">Kick Set</div>
-                                <div class="exercise-details">4 × 25m kick (15s rest)</div>
-                            </div>
-                        </div>
-                        <div class="exercise">
-                            <div class="exercise-checkbox"></div>
-                            <div class="exercise-info">
-                                <div class="exercise-name">Cool Down</div>
-                                <div class="exercise-details">100m easy choice</div>
-                            </div>
+                <div class="workout-card" id="workout-1" style="display: none;">
+                    <div class="workout-title">🏊 Tuesday - Pool Session</div>
+                    <div class="exercise">
+                        <div class="exercise-checkbox" onclick="toggleExercise(this)"></div>
+                        <div class="exercise-info">
+                            <div class="exercise-name">Swimming Laps</div>
+                            <div class="exercise-details">20 laps freestyle</div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Wednesday Workout -->
-                <div class="workout-card" id="wednesday-workout">
-                    <div class="workout-title">🦵 Lower Body Strength</div>
-                    <div class="equipment-badges">
-                        <span class="equipment-badge">Barbell</span>
-                        <span class="equipment-badge">Dumbbells</span>
-                        <span class="equipment-badge">Leg Press</span>
-                    </div>
-                    <div class="exercise-group">
-                        <h4>🦵 Primary Movements</h4>
-                        <div class="exercise">
-                            <div class="exercise-checkbox"></div>
-                            <div class="exercise-info">
-                                <div class="exercise-name">Barbell Squats</div>
-                                <div class="exercise-details">4 sets × 8-12 reps</div>
-                            </div>
-                        </div>
-                        <div class="exercise">
-                            <div class="exercise-checkbox"></div>
-                            <div class="exercise-info">
-                                <div class="exercise-name">Romanian Deadlifts</div>
-                                <div class="exercise-details">4 sets × 10-12 reps</div>
-                            </div>
-                        </div>
-                        <div class="exercise">
-                            <div class="exercise-checkbox"></div>
-                            <div class="exercise-info">
-                                <div class="exercise-name">Leg Press</div>
-                                <div class="exercise-details">3 sets × 15-20 reps</div>
-                            </div>
-                        </div>
-                        <div class="exercise">
-                            <div class="exercise-checkbox"></div>
-                            <div class="exercise-info">
-                                <div class="exercise-name">Walking Lunges</div>
-                                <div class="exercise-details">3 sets × 12 each leg</div>
-                            </div>
+                <div class="workout-card" id="workout-2" style="display: none;">
+                    <div class="workout-title">🦵 Wednesday - Lower Body</div>
+                    <div class="exercise">
+                        <div class="exercise-checkbox" onclick="toggleExercise(this)"></div>
+                        <div class="exercise-info">
+                            <div class="exercise-name">Squats</div>
+                            <div class="exercise-details">4 sets × 8-10 reps</div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Thursday Workout -->
-                <div class="workout-card" id="thursday-workout">
-                    <div class="workout-title">🏸 Squash Session</div>
-                    <div class="equipment-badges">
-                        <span class="equipment-badge">Squash Court</span>
-                        <span class="equipment-badge">Racquet</span>
-                    </div>
-                    <div class="exercise-group">
-                        <h4>🏸 Court Training</h4>
-                        <div class="exercise">
-                            <div class="exercise-checkbox"></div>
-                            <div class="exercise-info">
-                                <div class="exercise-name">Warm-up Rally</div>
-                                <div class="exercise-details">10 min cooperative hitting</div>
-                            </div>
-                        </div>
-                        <div class="exercise">
-                            <div class="exercise-checkbox"></div>
-                            <div class="exercise-info">
-                                <div class="exercise-name">Match Play</div>
-                                <div class="exercise-details">30-45 min competitive play</div>
-                            </div>
-                        </div>
-                        <div class="exercise">
-                            <div class="exercise-checkbox"></div>
-                            <div class="exercise-info">
-                                <div class="exercise-name">Cool Down</div>
-                                <div class="exercise-details">5 min light stretching</div>
-                            </div>
+                <div class="workout-card" id="workout-3" style="display: none;">
+                    <div class="workout-title">🏓 Thursday - Squash</div>
+                    <div class="exercise">
+                        <div class="exercise-checkbox" onclick="toggleExercise(this)"></div>
+                        <div class="exercise-info">
+                            <div class="exercise-name">Squash Match</div>
+                            <div class="exercise-details">45 minutes</div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Friday Workout -->
-                <div class="workout-card" id="friday-workout">
-                    <div class="workout-title">🔥 Full Body HIIT</div>
-                    <div class="equipment-badges">
-                        <span class="equipment-badge">Gym Equipment</span>
-                        <span class="equipment-badge">Cardio Machines</span>
-                    </div>
-                    <div class="exercise-group">
-                        <h4>🔥 HIIT Circuit (4 rounds, 45s work / 15s rest)</h4>
-                        <div class="exercise">
-                            <div class="exercise-checkbox"></div>
-                            <div class="exercise-info">
-                                <div class="exercise-name">Rowing Machine</div>
-                                <div class="exercise-details">45 seconds max effort</div>
-                                <div class="exercise-timer">
-                                    <button class="timer-btn" data-exercise="rowing" data-type="hiit" data-work="45" data-rest="15">Start HIIT</button>
-                                    <span class="timer-display">45s work / 15s rest</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="exercise">
-                            <div class="exercise-checkbox"></div>
-                            <div class="exercise-info">
-                                <div class="exercise-name">Burpees</div>
-                                <div class="exercise-details">45 seconds</div>
-                            </div>
-                        </div>
-                        <div class="exercise">
-                            <div class="exercise-checkbox"></div>
-                            <div class="exercise-info">
-                                <div class="exercise-name">Battle Ropes</div>
-                                <div class="exercise-details">45 seconds</div>
-                            </div>
-                        </div>
-                        <div class="exercise">
-                            <div class="exercise-checkbox"></div>
-                            <div class="exercise-info">
-                                <div class="exercise-name">Mountain Climbers</div>
-                                <div class="exercise-details">45 seconds</div>
-                            </div>
+                <div class="workout-card" id="workout-4" style="display: none;">
+                    <div class="workout-title">🔥 Friday - HIIT</div>
+                    <div class="exercise">
+                        <div class="exercise-checkbox" onclick="toggleExercise(this)"></div>
+                        <div class="exercise-info">
+                            <div class="exercise-name">Full Body HIIT</div>
+                            <div class="exercise-details">30 minutes high intensity</div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Saturday Workout -->
-                <div class="workout-card" id="saturday-workout">
-                    <div class="workout-title">🏊 Long Swim</div>
-                    <div class="equipment-badges">
-                        <span class="equipment-badge">Swimming Pool</span>
-                    </div>
-                    <div class="exercise-group">
-                        <h4>🏊 Endurance Session</h4>
-                        <div class="exercise">
-                            <div class="exercise-checkbox"></div>
-                            <div class="exercise-info">
-                                <div class="exercise-name">Continuous Swim</div>
-                                <div class="exercise-details">800-1200m steady pace</div>
-                            </div>
-                        </div>
-                        <div class="exercise">
-                            <div class="exercise-checkbox"></div>
-                            <div class="exercise-info">
-                                <div class="exercise-name">Stroke Variety</div>
-                                <div class="exercise-details">Mix freestyle, backstroke, breaststroke</div>
-                            </div>
+                <div class="workout-card" id="workout-5" style="display: none;">
+                    <div class="workout-title">🏊 Saturday - Long Swim</div>
+                    <div class="exercise">
+                        <div class="exercise-checkbox" onclick="toggleExercise(this)"></div>
+                        <div class="exercise-info">
+                            <div class="exercise-name">Endurance Swimming</div>
+                            <div class="exercise-details">60 minutes continuous</div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Sunday Workout -->
-                <div class="workout-card" id="sunday-workout">
-                    <div class="workout-title">😴 Complete Rest</div>
-                    <div class="exercise-group">
-                        <h4>😴 Recovery & Prep</h4>
-                        <div class="exercise">
-                            <div class="exercise-checkbox"></div>
-                            <div class="exercise-info">
-                                <div class="exercise-name">Complete Rest</div>
-                                <div class="exercise-details">No formal exercise</div>
-                            </div>
+                <div class="workout-card" id="workout-6" style="display: none;">
+                    <div class="workout-title">😴 Sunday - Rest Day</div>
+                    <div class="exercise">
+                        <div class="exercise-checkbox" onclick="toggleExercise(this)"></div>
+                        <div class="exercise-info">
+                            <div class="exercise-name">Recovery & Planning</div>
+                            <div class="exercise-details">Light stretching, meal prep</div>
                         </div>
-                        <div class="exercise">
-                            <div class="exercise-checkbox"></div>
-                            <div class="exercise-info">
-                                <div class="exercise-name">Planning</div>
-                                <div class="exercise-details">Prepare for the week ahead</div>
-                            </div>
+                    </div>
+                </div>
+
+                <!-- Workout Logger Section -->
+                <div class="workout-logger">
+                    <div class="logger-header">
+                        <h3>Today's Workout</h3>
+                        <div class="logger-actions">
+                            <button class="action-btn" id="load-template-btn">📋 Load Template</button>
+                            <button class="action-btn" id="save-template-btn">💾 Save as Template</button>
+                        </div>
+                    </div>
+                    
+                    <div class="workout-exercises" id="workout-exercises">
+                        <div class="no-exercises" id="no-exercises">
+                            <div class="no-exercises-icon">💪</div>
+                            <p>No exercises logged yet</p>
+                            <button class="add-exercise-btn" id="add-first-exercise">Add Your First Exercise</button>
+                        </div>
+                    </div>
+                    
+                    <div class="workout-actions">
+                        <button class="primary-btn" id="add-exercise-btn">+ Add Exercise</button>
+                        <button class="secondary-btn" id="finish-workout-btn" style="display: none;">Finish Workout</button>
+                    </div>
+                </div>
+                
+                <!-- Exercise Templates Quick Access -->
+                <div class="quick-templates">
+                    <h4>Quick Start Templates</h4>
+                    <div class="template-buttons">
+                        <button class="template-btn" data-template="push">Push Day</button>
+                        <button class="template-btn" data-template="pull">Pull Day</button>
+                        <button class="template-btn" data-template="legs">Leg Day</button>
+                        <button class="template-btn" data-template="full-body">Full Body</button>
+                        <button class="template-btn" data-template="cardio">Cardio</button>
+                    </div>
+                </div>
+                
+                <!-- Recent Workouts -->
+                <div class="recent-workouts">
+                    <h4>Recent Workouts</h4>
+                    <div class="recent-workout-list" id="recent-workout-list">
+                        <div class="recent-workout-item">
+                            <span class="workout-date">No recent workouts</span>
+                            <span class="workout-summary">Start logging to see your history!</span>
                         </div>
                     </div>
                 </div>
@@ -530,6 +356,15 @@
                             <p>Log your weight to see progress chart</p>
                         </div>
                     </div>
+                    <div class="weight-history">
+                        <h4>Recent Entries</h4>
+                        <div id="weight-history-list" class="weight-history-list">
+                            <div class="weight-history-item">
+                                <span class="history-date">No entries yet</span>
+                                <span class="history-weight">Start tracking your weight!</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -603,46 +438,71 @@
         </div>
     </div>
     
-    <!-- Timer Modal -->
-    <div id="timer-modal" class="timer-modal">
-        <div class="timer-modal-content">
-            <div class="timer-header">
-                <h2 id="timer-exercise-name">Exercise Name</h2>
-                <button class="timer-close" id="close-timer">×</button>
+    <!-- Exercise Entry Modal -->
+    <div id="exercise-modal" class="exercise-modal">
+        <div class="exercise-modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Add Exercise</h2>
+                <button class="modal-close" id="close-exercise-modal">×</button>
             </div>
             
-            <div class="timer-main">
-                <div class="timer-circle">
-                    <svg class="timer-progress" width="200" height="200">
-                        <circle cx="100" cy="100" r="90" fill="none" stroke="#f0f0f0" stroke-width="8"/>
-                        <circle id="timer-progress-circle" cx="100" cy="100" r="90" fill="none" stroke="#667eea" stroke-width="8" stroke-linecap="round" transform="rotate(-90 100 100)"/>
-                    </svg>
-                    <div class="timer-time" id="timer-time">00:00</div>
-                    <div class="timer-phase" id="timer-phase">Ready</div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="exercise-category">Category</label>
+                    <select id="exercise-category" class="form-select">
+                        <option value="">Select Category</option>
+                        <option value="chest">Chest</option>
+                        <option value="back">Back</option>
+                        <option value="shoulders">Shoulders</option>
+                        <option value="arms">Arms</option>
+                        <option value="legs">Legs</option>
+                        <option value="core">Core</option>
+                        <option value="cardio">Cardio</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="exercise-name">Exercise</label>
+                    <select id="exercise-name" class="form-select">
+                        <option value="">Select Exercise</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="exercise-equipment">Equipment</label>
+                    <select id="exercise-equipment" class="form-select">
+                        <option value="bodyweight">Bodyweight</option>
+                        <option value="barbell">Barbell</option>
+                        <option value="dumbbells">Dumbbells</option>
+                        <option value="machine">Machine</option>
+                        <option value="cable">Cable</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="sets-section">
+                    <h4>Sets</h4>
+                    <div id="sets-container">
+                        <div class="set-entry">
+                            <span class="set-number">Set 1:</span>
+                            <input type="number" class="set-weight" placeholder="Weight" step="0.5">
+                            <span class="unit">kg</span>
+                            <input type="number" class="set-reps" placeholder="Reps">
+                            <span class="unit">reps</span>
+                        </div>
+                    </div>
+                    <button class="add-set-btn" id="add-set-btn">+ Add Set</button>
+                </div>
+                
+                <div class="form-group">
+                    <label for="exercise-notes">Notes (optional)</label>
+                    <textarea id="exercise-notes" class="form-textarea" placeholder="How did it feel? Any observations?"></textarea>
                 </div>
             </div>
             
-            <div class="timer-controls">
-                <button class="timer-control-btn" id="timer-start">Start</button>
-                <button class="timer-control-btn" id="timer-pause">Pause</button>
-                <button class="timer-control-btn" id="timer-skip">Skip</button>
-            </div>
-            
-            <div class="timer-info">
-                <div class="timer-stats">
-                    <div class="timer-stat">
-                        <span class="timer-stat-label">Set</span>
-                        <span class="timer-stat-value" id="timer-current-set">1</span>
-                    </div>
-                    <div class="timer-stat">
-                        <span class="timer-stat-label">Total</span>
-                        <span class="timer-stat-value" id="timer-total-sets">4</span>
-                    </div>
-                    <div class="timer-stat">
-                        <span class="timer-stat-label">Completed</span>
-                        <span class="timer-stat-value" id="timer-completed">0</span>
-                    </div>
-                </div>
+            <div class="modal-footer">
+                <button class="secondary-btn" id="cancel-exercise">Cancel</button>
+                <button class="primary-btn" id="save-exercise">Save Exercise</button>
             </div>
         </div>
     </div>

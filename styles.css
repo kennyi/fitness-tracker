@@ -1095,11 +1095,508 @@ body {
     }
 }
 
-/* Hide elements that are shown for specific days */
-.workout-card[id] {
-    display: none;
+/* Workout Logger Styles */
+.workout-logger {
+    background: #2d3748;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #4a5568;
 }
 
-.workout-card[id].active {
+.logger-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.logger-header h3 {
+    color: #e2e8f0;
+    margin: 0;
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.logger-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.action-btn {
+    background: #4a5568;
+    color: #e2e8f0;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.8em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+    background: #667eea;
+    transform: translateY(-1px);
+}
+
+.workout-exercises {
+    min-height: 100px;
+    margin-bottom: 20px;
+}
+
+.no-exercises {
+    text-align: center;
+    padding: 40px 20px;
+    color: #a0aec0;
+}
+
+.no-exercises-icon {
+    font-size: 3em;
+    margin-bottom: 16px;
+    opacity: 0.6;
+}
+
+.no-exercises p {
+    margin-bottom: 16px;
+    font-size: 1em;
+}
+
+.add-exercise-btn {
+    background: #667eea;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.add-exercise-btn:hover {
+    background: #5a6fd8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.workout-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.primary-btn {
+    background: #00b894;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex: 1;
+    max-width: 200px;
+}
+
+.primary-btn:hover {
+    background: #00a085;
+    transform: translateY(-1px);
+}
+
+.secondary-btn {
+    background: #4a5568;
+    color: #e2e8f0;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex: 1;
+    max-width: 200px;
+}
+
+.secondary-btn:hover {
+    background: #2d3748;
+    transform: translateY(-1px);
+}
+
+/* Quick Templates */
+.quick-templates {
+    background: #2d3748;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #4a5568;
+}
+
+.quick-templates h4 {
+    color: #e2e8f0;
+    margin-bottom: 16px;
+    font-size: 1em;
+    font-weight: 600;
+}
+
+.template-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 8px;
+}
+
+.template-btn {
+    background: #4a5568;
+    color: #e2e8f0;
+    border: none;
+    padding: 12px 8px;
+    border-radius: 8px;
+    font-size: 0.85em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.template-btn:hover {
+    background: #667eea;
+    transform: translateY(-1px);
+}
+
+.template-btn:active {
+    transform: scale(0.95);
+}
+
+/* Recent Workouts */
+.recent-workouts {
+    background: #2d3748;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #4a5568;
+}
+
+.recent-workouts h4 {
+    color: #e2e8f0;
+    margin-bottom: 16px;
+    font-size: 1em;
+    font-weight: 600;
+}
+
+.recent-workout-list {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.recent-workout-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #4a5568;
+    font-size: 0.9em;
+}
+
+.recent-workout-item:last-child {
+    border-bottom: none;
+}
+
+.workout-date {
+    color: #a0aec0;
+    font-weight: 500;
+}
+
+.workout-summary {
+    color: #e2e8f0;
+    font-weight: 600;
+    text-align: right;
+}
+
+/* Exercise Modal */
+.exercise-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.exercise-modal.active {
+    display: flex;
+}
+
+.exercise-modal-content {
+    background: #2d3748;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px 0;
+    margin-bottom: 20px;
+}
+
+.modal-header h2 {
+    color: #e2e8f0;
+    margin: 0;
+    font-size: 1.3em;
+    font-weight: 600;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 2em;
+    color: #a0aec0;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.modal-close:hover {
+    background: #4a5568;
+    color: #e2e8f0;
+}
+
+.modal-body {
+    padding: 0 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
     display: block;
+    color: #e2e8f0;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.form-select, .form-textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #4a5568;
+    border-radius: 8px;
+    background: #1a202c;
+    color: #e2e8f0;
+    font-size: 1em;
+}
+
+.form-select:focus, .form-textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Sets Section */
+.sets-section {
+    margin: 20px 0;
+}
+
+.sets-section h4 {
+    color: #e2e8f0;
+    margin-bottom: 16px;
+    font-size: 1em;
+    font-weight: 600;
+}
+
+#sets-container {
+    margin-bottom: 16px;
+}
+
+.set-entry {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    padding: 12px;
+    background: #1a202c;
+    border-radius: 8px;
+    border: 1px solid #4a5568;
+}
+
+.set-number {
+    color: #a0aec0;
+    font-weight: 600;
+    min-width: 50px;
+    font-size: 0.9em;
+}
+
+.set-weight, .set-reps {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #4a5568;
+    border-radius: 6px;
+    background: #2d3748;
+    color: #e2e8f0;
+    text-align: center;
+    font-size: 0.9em;
+}
+
+.set-weight:focus, .set-reps:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.3);
+}
+
+.unit {
+    color: #a0aec0;
+    font-size: 0.8em;
+    font-weight: 500;
+    min-width: 35px;
+    text-align: center;
+}
+
+.add-set-btn {
+    background: #4a5568;
+    color: #e2e8f0;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 0.9em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+}
+
+.add-set-btn:hover {
+    background: #667eea;
+    transform: translateY(-1px);
+}
+
+.modal-footer {
+    display: flex;
+    gap: 12px;
+    padding: 20px;
+}
+
+.modal-footer .secondary-btn,
+.modal-footer .primary-btn {
+    flex: 1;
+}
+
+/* Exercise List Item */
+.exercise-item {
+    background: #1a202c;
+    border: 1px solid #4a5568;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    transition: all 0.2s ease;
+}
+
+.exercise-item:hover {
+    border-color: #667eea;
+    transform: translateY(-1px);
+}
+
+.exercise-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.exercise-title {
+    color: #e2e8f0;
+    font-weight: 600;
+    font-size: 1.1em;
+}
+
+.exercise-category {
+    background: #4a5568;
+    color: #e2e8f0;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.75em;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.exercise-details {
+    color: #a0aec0;
+    font-size: 0.9em;
+    margin-bottom: 12px;
+}
+
+.sets-list {
+    display: grid;
+    gap: 8px;
+}
+
+.set-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: #2d3748;
+    border-radius: 6px;
+    font-size: 0.9em;
+}
+
+.set-info {
+    color: #e2e8f0;
+    font-weight: 500;
+}
+
+.set-volume {
+    color: #a0aec0;
+    font-size: 0.8em;
+}
+
+.exercise-notes {
+    margin-top: 12px;
+    padding: 8px 12px;
+    background: #2d3748;
+    border-radius: 6px;
+    color: #a0aec0;
+    font-size: 0.85em;
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .exercise-modal-content {
+        margin: 10px;
+        max-height: 95vh;
+    }
+    
+    .template-buttons {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .set-entry {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+    
+    .set-weight, .set-reps {
+        min-width: 80px;
+    }
 }
