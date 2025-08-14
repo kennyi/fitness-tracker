@@ -13,27 +13,7 @@
 <body>
     <div class="app-container">
         <div class="header">
-            <h1>🏋️ FitTracker Pro</h1>
-            <p>Home • Gym • Pool • Progress</p>
-        </div>
-        
-        <div class="current-day-card">
-            <h2 id="current-date">Loading...</h2>
-            <p id="current-day-message">Getting your workout ready...</p>
-        </div>
-        
-        <div class="day-nav">
-            <button class="nav-btn" id="prev-day-btn">← Prev</button>
-            <div class="week-dots">
-                <div class="day-dot" data-day="0"></div>
-                <div class="day-dot" data-day="1"></div>
-                <div class="day-dot" data-day="2"></div>
-                <div class="day-dot" data-day="3"></div>
-                <div class="day-dot" data-day="4"></div>
-                <div class="day-dot" data-day="5"></div>
-                <div class="day-dot" data-day="6"></div>
-            </div>
-            <button class="nav-btn" id="next-day-btn">Next →</button>
+            <h1>Fitness Tracker</h1>
         </div>
         
         <div class="floating-progress" id="daily-progress">0%</div>
@@ -41,6 +21,25 @@
         <div class="content">
             <!-- WORKOUT TAB -->
             <div id="workout" class="tab-content active">
+                <div class="current-day-card">
+                    <h2 id="current-date">Loading...</h2>
+                    <p id="current-day-message">Getting your workout ready...</p>
+                </div>
+                
+                <div class="day-nav">
+                    <button class="nav-btn" id="prev-day-btn">← Prev</button>
+                    <div class="week-dots">
+                        <div class="day-dot" data-day="0"></div>
+                        <div class="day-dot" data-day="1"></div>
+                        <div class="day-dot" data-day="2"></div>
+                        <div class="day-dot" data-day="3"></div>
+                        <div class="day-dot" data-day="4"></div>
+                        <div class="day-dot" data-day="5"></div>
+                        <div class="day-dot" data-day="6"></div>
+                    </div>
+                    <button class="nav-btn" id="next-day-btn">Next →</button>
+                </div>
+                
                 <div class="week-selector">
                     <button class="week-btn active" data-week="1">Week 1<br>Foundation</button>
                     <button class="week-btn" data-week="2">Week 2<br>Intensity</button>
@@ -63,6 +62,18 @@
                             <div class="exercise-info">
                                 <div class="exercise-name">Pull-ups</div>
                                 <div class="exercise-details">4 sets × 6-10 reps</div>
+                                <div class="exercise-tracking">
+                                    <div class="tracking-inputs">
+                                        <input type="number" class="weight-input" placeholder="Weight" data-exercise="pull-ups">
+                                        <span class="weight-unit">kg</span>
+                                        <input type="number" class="reps-input" placeholder="Reps" data-exercise="pull-ups">
+                                        <button class="log-btn" data-exercise="pull-ups">Log Set</button>
+                                    </div>
+                                    <div class="exercise-history" id="pull-ups-history">
+                                        <span class="last-performance">Last: -</span>
+                                        <span class="personal-record">PR: -</span>
+                                    </div>
+                                </div>
                                 <div class="exercise-timer">
                                     <button class="timer-btn" data-exercise="pull-ups" data-type="strength" data-rest="90">Start Set</button>
                                     <span class="timer-display">Rest: 90s</span>
@@ -74,6 +85,18 @@
                             <div class="exercise-info">
                                 <div class="exercise-name">Dumbbell Bench Press</div>
                                 <div class="exercise-details">4 sets × 8-12 reps</div>
+                                <div class="exercise-tracking">
+                                    <div class="tracking-inputs">
+                                        <input type="number" class="weight-input" placeholder="Weight" data-exercise="db-bench">
+                                        <span class="weight-unit">kg</span>
+                                        <input type="number" class="reps-input" placeholder="Reps" data-exercise="db-bench">
+                                        <button class="log-btn" data-exercise="db-bench">Log Set</button>
+                                    </div>
+                                    <div class="exercise-history" id="db-bench-history">
+                                        <span class="last-performance">Last: -</span>
+                                        <span class="personal-record">PR: -</span>
+                                    </div>
+                                </div>
                                 <div class="exercise-timer">
                                     <button class="timer-btn" data-exercise="db-bench" data-type="strength" data-rest="120">Start Set</button>
                                     <span class="timer-display">Rest: 2m</span>
@@ -381,9 +404,130 @@
                 <div class="workout-card">
                     <div class="workout-title">📈 Recent Sessions</div>
                     <div id="recent-sessions">
-                        <div class="empty-state">
-                            <div class="empty-icon">📊</div>
-                            <p>Complete your first workout to see session history here</p>
+                        <div class="progress-summary">
+                            <div class="summary-item">
+                                <span class="summary-label">Total Sets Logged</span>
+                                <span class="summary-value" id="total-sets-logged">0</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Personal Records</span>
+                                <span class="summary-value" id="total-prs">0</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Total Volume</span>
+                                <span class="summary-value" id="total-volume">0kg</span>
+                            </div>
+                        </div>
+                        <div id="recent-sets-list"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PROFILE TAB -->
+            <div id="profile" class="tab-content">
+                <div class="workout-card">
+                    <div class="workout-title">👤 Personal Information</div>
+                    <div class="profile-form">
+                        <div class="form-group">
+                            <label for="user-height">Height (cm)</label>
+                            <input type="number" id="user-height" class="form-input" placeholder="180">
+                        </div>
+                        <div class="form-group">
+                            <label for="user-age">Age</label>
+                            <input type="number" id="user-age" class="form-input" placeholder="25">
+                        </div>
+                        <div class="form-group">
+                            <label for="fitness-goal">Primary Goal</label>
+                            <select id="fitness-goal" class="form-select">
+                                <option value="fat-loss">Fat Loss</option>
+                                <option value="muscle-gain">Muscle Gain</option>
+                                <option value="strength">Strength</option>
+                                <option value="endurance">Endurance</option>
+                                <option value="general">General Fitness</option>
+                            </select>
+                        </div>
+                        <button class="save-profile-btn" id="save-profile">Save Profile</button>
+                    </div>
+                </div>
+                
+                <div class="workout-card">
+                    <div class="workout-title">🏋️ Equipment Access</div>
+                    <div class="equipment-grid">
+                        <div class="equipment-item">
+                            <input type="checkbox" id="eq-dumbbells" class="equipment-checkbox">
+                            <label for="eq-dumbbells">Dumbbells</label>
+                        </div>
+                        <div class="equipment-item">
+                            <input type="checkbox" id="eq-barbell" class="equipment-checkbox">
+                            <label for="eq-barbell">Barbell</label>
+                        </div>
+                        <div class="equipment-item">
+                            <input type="checkbox" id="eq-pullup" class="equipment-checkbox">
+                            <label for="eq-pullup">Pull-up Bar</label>
+                        </div>
+                        <div class="equipment-item">
+                            <input type="checkbox" id="eq-dips" class="equipment-checkbox">
+                            <label for="eq-dips">Dip Station</label>
+                        </div>
+                        <div class="equipment-item">
+                            <input type="checkbox" id="eq-bench" class="equipment-checkbox">
+                            <label for="eq-bench">Bench</label>
+                        </div>
+                        <div class="equipment-item">
+                            <input type="checkbox" id="eq-squat-rack" class="equipment-checkbox">
+                            <label for="eq-squat-rack">Squat Rack</label>
+                        </div>
+                        <div class="equipment-item">
+                            <input type="checkbox" id="eq-pool" class="equipment-checkbox">
+                            <label for="eq-pool">Swimming Pool</label>
+                        </div>
+                        <div class="equipment-item">
+                            <input type="checkbox" id="eq-squash" class="equipment-checkbox">
+                            <label for="eq-squash">Squash Court</label>
+                        </div>
+                        <div class="equipment-item">
+                            <input type="checkbox" id="eq-cardio" class="equipment-checkbox">
+                            <label for="eq-cardio">Cardio Machines</label>
+                        </div>
+                        <div class="equipment-item">
+                            <input type="checkbox" id="eq-cables" class="equipment-checkbox">
+                            <label for="eq-cables">Cable Machine</label>
+                        </div>
+                    </div>
+                    <button class="save-profile-btn" id="save-equipment">Save Equipment</button>
+                </div>
+                
+                <div class="workout-card">
+                    <div class="workout-title">⚖️ Weight Tracking</div>
+                    <div class="weight-tracking">
+                        <div class="weight-input-group">
+                            <input type="number" id="current-weight" class="form-input" placeholder="Current Weight (kg)" step="0.1">
+                            <button class="log-weight-btn" id="log-weight">Log Weight</button>
+                        </div>
+                        <div class="weight-input-group">
+                            <input type="number" id="goal-weight" class="form-input" placeholder="Goal Weight (kg)" step="0.1">
+                            <span class="input-label">Set your target weight</span>
+                        </div>
+                        <div class="weight-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Current</span>
+                                <span class="stat-value" id="current-weight-display">-- kg</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Goal</span>
+                                <span class="stat-value" id="goal-weight-display">-- kg</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Change</span>
+                                <span class="stat-value" id="weight-change-display">-- kg</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="weight-chart-container">
+                        <canvas id="weight-chart" width="400" height="200"></canvas>
+                        <div class="chart-placeholder" id="chart-placeholder">
+                            <div class="placeholder-icon">📈</div>
+                            <p>Log your weight to see progress chart</p>
                         </div>
                     </div>
                 </div>
@@ -447,6 +591,10 @@
             <button class="nav-item">
                 <div class="nav-icon">📈</div>
                 <div class="nav-label">Progress</div>
+            </button>
+            <button class="nav-item">
+                <div class="nav-icon">👤</div>
+                <div class="nav-label">Profile</div>
             </button>
             <button class="nav-item">
                 <div class="nav-icon">⚙️</div>
